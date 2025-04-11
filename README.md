@@ -14,11 +14,12 @@ Proyek ini bertujuan untuk mengumpulkan, menganalisis, dan mengklasifikasikan ul
 ## 📁 Struktur Proyek
 
 ```
-├── reviews_ovo.csv                   # Dataset hasil scraping
+├── models/                               # models yang dihasilkan dan digunakan pada predict_model
+├── reviews_ovo.csv                       # Dataset hasil scraping
 ├── Scrapper_Aplikasi_OVO_PlayStore.ipynb # Kode Scrapping ulasan playstore 
-├── analisis-sentiment-review-ovo.ipynb  # Notebook utama
-├── requirements.txt        # Dependensi proyek
-├── README.md               # Dokumentasi proyek ini
+├── analisis-sentiment-review-ovo.ipynb   # Notebook utama
+├── requirements.txt                      # Dependensi proyek
+├── README.md                             # Dokumentasi proyek ini
 ```
 
 ## ⚙️ Instalasi
@@ -51,7 +52,7 @@ jupyter notebook analisis-sentiment-review-ovo.ipynb
 
 ## 🧪 Evaluasi Model
 
-- Model: CNN + LSTM, MLP, Naive Bayes, Logistic Regression, CNN + LSTM + Keras tuner RandomSearch
+- Model: CNN + LSTM, MLP, Naive Bayes, Logistic Regression, best CNN + LSTM + Keras tuner RandomSearch
 - Input: Word2Vec Vectorized Text, TF-IDF
 - Output: Klasifikasi ulasan (Positif/Negatif)
 - Evaluasi:
