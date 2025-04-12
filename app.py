@@ -10,6 +10,9 @@ from gensim.models import Word2Vec
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
+def custom_initializer():
+    return Orthogonal(gain=1.0)
+    
 # Fungsi rata-rata vektor kata (Word2Vec)
 def get_sentence_vector(sentence, model):
     words = sentence.split()
@@ -49,7 +52,7 @@ for local_path, filename in model_files.items():
     download_file(base_url + filename, local_path)
 
 model_w2v = Word2Vec.load("models/model_w2v.model")
-model_cnn_lstm = load_model("models/cnn_lstm_model.h5", custom_objects={"Orthogonal": Orthogonal()})
+model_cnn_lstm = load_model("models/cnn_lstm_model.h5", custom_objects={"Orthogonal": custom_initializer})
 tfidf_vectorizer = joblib.load("models/tfidf_vectorizer.pkl")
 model_nb = joblib.load("models/model_naive_bayes.pkl")
 model_lr = joblib.load("models/model_logistic_regression.pkl")
