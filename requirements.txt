@@ -11,5 +11,5 @@ scikit-learn
 matplotlib
 numpy
 pandas
-tensorflow=2.10.0
+tensorflow==2.10.0
 wordcloud
