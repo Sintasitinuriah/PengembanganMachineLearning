@@ -14,3 +14,4 @@ pandas
 tensorflow==2.10.0
 keras==2.10.0
 wordcloud
+h5py
