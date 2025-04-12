@@ -1,5 +1,4 @@
 pip>=25.0.1
-python==3.10
 streamlit==1.13.0
 gensim
 nltk
@@ -14,8 +13,8 @@ scikit-learn
 matplotlib
 numpy
 pandas
-tensorflow==2.10.0
-keras==2.10.0
+tensorflow==2.16.*
+keras==3.0.0
 wordcloud
 h5py
 altair<5
