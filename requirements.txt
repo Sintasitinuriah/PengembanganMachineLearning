@@ -14,5 +14,6 @@ matplotlib
 numpy
 pandas
 tensorflow==2.16.*
+keras==3.0.0
 wordcloud
 h5py
