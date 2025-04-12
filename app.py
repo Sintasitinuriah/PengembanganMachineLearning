@@ -1,4 +1,5 @@
 import os
+import zipfile
 import requests
 import streamlit as st
 import numpy as np
@@ -23,7 +24,8 @@ def get_sentence_vector(sentence, model):
 if "history" not in st.session_state:
     st.session_state.history = []
 
-# ======== LOAD SEMUA MODEL ========
+# ======== FUNGSI DOWNLOAD DAN EXTRACT MODEL ========
+
 def download_file(url, local_path):
     if not os.path.exists(local_path):
         print(f"Downloading {local_path}...")
@@ -34,25 +36,40 @@ def download_file(url, local_path):
         else:
             raise Exception(f"Failed to download {url}. Status code: {response.status_code}")
 
+def extract_zip(zip_path, extract_to):
+    with zipfile.ZipFile(zip_path, 'r') as zip_ref:
+        zip_ref.extractall(extract_to)
+
+# ======== DAFTAR FILE YANG AKAN DIUNDUH ========
+
 base_url = "https://raw.githubusercontent.com/Sintasitinuriah/PengembanganMachineLearning/main/models/"
 
-# Daftar file yang ingin diunduh
 model_files = {
     "models/model_w2v.model": "model_w2v.model",
-    "models/cnn_lstm_model.h5": "cnn_lstm_model.h5",
+    "models/cnn_lstm_model_tf.zip": "cnn_lstm_model_tf.zip",
     "models/tfidf_vectorizer.pkl": "tfidf_vectorizer.pkl",
     "models/model_naive_bayes.pkl": "model_naive_bayes.pkl",
     "models/model_logistic_regression.pkl": "model_logistic_regression.pkl",
     "models/model_mlp.pkl": "model_mlp.pkl"
 }
 
+# ======== DOWNLOAD SEMUA MODEL JIKA BELUM ADA ========
+
 os.makedirs("models", exist_ok=True)
 
 for local_path, filename in model_files.items():
     download_file(base_url + filename, local_path)
 
+# ======== EKSTRAK MODEL CNN-LSTM JIKA PERLU ========
+
+saved_model_dir = "models/cnn_lstm_model_tf"
+if not os.path.exists(saved_model_dir):
+    extract_zip("models/cnn_lstm_model_tf.zip", "models/")
+
+# ======== LOAD SEMUA MODEL ========
+
 model_w2v = Word2Vec.load("models/model_w2v.model")
-model_cnn_lstm = load_model("models/cnn_lstm_model.h5", custom_objects={"Orthogonal": Orthogonal()})
+model_cnn_lstm = load_model(saved_model_dir)
 tfidf_vectorizer = joblib.load("models/tfidf_vectorizer.pkl")
 model_nb = joblib.load("models/model_naive_bayes.pkl")
 model_lr = joblib.load("models/model_logistic_regression.pkl")
