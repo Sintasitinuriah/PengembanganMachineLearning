@@ -36,7 +36,7 @@ base_url = "https://raw.githubusercontent.com/Sintasitinuriah/PengembanganMachin
 # Daftar file yang ingin diunduh
 model_files = {
     "models/model_w2v.model": "model_w2v.model",
-    "models/cnn_lstm_model_v2.h5": "cnn_lstm_model_v2.h5",
+    "models/cnn_lstm_model_v2.keras": "cnn_lstm_model_v2.keras",
     "models/tfidf_vectorizer.pkl": "tfidf_vectorizer.pkl",
     "models/model_naive_bayes.pkl": "model_naive_bayes.pkl",
     "models/model_logistic_regression.pkl": "model_logistic_regression.pkl",
@@ -49,7 +49,7 @@ for local_path, filename in model_files.items():
     download_file(base_url + filename, local_path)
 
 model_w2v = Word2Vec.load("models/model_w2v.model")
-model_cnn_lstm = load_model("models/cnn_lstm_model_v2.h5", custom_objects={'Orthogonal': Orthogonal()})
+model_cnn_lstm = load_model("models/cnn_lstm_model_v2.keras")
 tfidf_vectorizer = joblib.load("models/tfidf_vectorizer.pkl")
 model_nb = joblib.load("models/model_naive_bayes.pkl")
 model_lr = joblib.load("models/model_logistic_regression.pkl")
