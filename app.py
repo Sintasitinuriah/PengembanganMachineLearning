@@ -46,6 +46,7 @@ base_url = "https://raw.githubusercontent.com/Sintasitinuriah/PengembanganMachin
 
 model_files = {
     "models/model_w2v.model": "model_w2v.model",
+    "models/cnn_lstm_model.h5": "cnn_lstm_model.h5",
     "models/cnn_lstm_model_tf.zip": "cnn_lstm_model_tf.zip",
     "models/tfidf_vectorizer.pkl": "tfidf_vectorizer.pkl",
     "models/model_naive_bayes.pkl": "model_naive_bayes.pkl",
@@ -69,7 +70,7 @@ if not os.path.exists(saved_model_dir):
 # ======== LOAD SEMUA MODEL ========
 
 model_w2v = Word2Vec.load("models/model_w2v.model")
-model_cnn_lstm = load_model(saved_model_dir)
+model_cnn_lstm = load_model("models/cnn_lstm_model.h5")
 tfidf_vectorizer = joblib.load("models/tfidf_vectorizer.pkl")
 model_nb = joblib.load("models/model_naive_bayes.pkl")
 model_lr = joblib.load("models/model_logistic_regression.pkl")
