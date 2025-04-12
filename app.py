@@ -11,7 +11,7 @@ from wordcloud import WordCloud
 import matplotlib.pyplot as plt
 
 def custom_initializer():
-    return Orthogonal(gain=1.0, seed:None)
+    return Orthogonal(gain=1.0, seed=None)
     
 # Fungsi rata-rata vektor kata (Word2Vec)
 def get_sentence_vector(sentence, model):
