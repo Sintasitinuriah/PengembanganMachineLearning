@@ -13,7 +13,7 @@ scikit-learn
 matplotlib
 numpy
 pandas
-tensorflow==2.13.0
-keras==2.13.0
+tensorflow==2.16.*
+keras==2.16.*
 wordcloud
 h5py
