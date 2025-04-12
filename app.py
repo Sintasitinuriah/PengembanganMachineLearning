@@ -19,11 +19,35 @@ if "history" not in st.session_state:
     st.session_state.history = []
 
 # ======== LOAD SEMUA MODEL ========
+def download_file(url, local_path):
+    if not os.path.exists(local_path):
+        print(f"Downloading {local_path}...")
+        response = requests.get(url)
+        if response.status_code == 200:
+            with open(local_path, 'wb') as f:
+                f.write(response.content)
+        else:
+            raise Exception(f"Failed to download {url}. Status code: {response.status_code}")
+
+base_url = "https://raw.githubusercontent.com/Sintasitinuriah/PengembanganMachineLearning/main/models/"
+
+# Daftar file yang ingin diunduh
+model_files = {
+    "models/model_w2v.model": "model_w2v.model",
+    "models/cnn_lstm_model_v2.h5": "cnn_lstm_model_v2.h5",
+    "models/tfidf_vectorizer.pkl": "tfidf_vectorizer.pkl",
+    "models/model_naive_bayes.pkl": "model_naive_bayes.pkl",
+    "models/model_logistic_regression.pkl": "model_logistic_regression.pkl",
+    "models/model_mlp.pkl": "model_mlp.pkl"
+}
+
+os.makedirs("models", exist_ok=True)
+
+for local_path, filename in model_files.items():
+    download_file(base_url + filename, local_path)
+
 model_w2v = Word2Vec.load("models/model_w2v.model")
-model_cnn_lstm = load_model(
-    "models/cnn_lstm_model_v2.h5",
-    custom_objects={'Orthogonal': Orthogonal()}
-)
+model_cnn_lstm = load_model("models/cnn_lstm_model_v2.h5", custom_objects={'Orthogonal': Orthogonal()})
 tfidf_vectorizer = joblib.load("models/tfidf_vectorizer.pkl")
 model_nb = joblib.load("models/model_naive_bayes.pkl")
 model_lr = joblib.load("models/model_logistic_regression.pkl")
