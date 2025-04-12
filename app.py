@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 import joblib
 from keras.models import load_model
+from tensorflow.keras.initializers import Orthogonal
 from gensim.models import Word2Vec
 from wordcloud import WordCloud
 import matplotlib.pyplot as plt
@@ -19,7 +20,10 @@ if "history" not in st.session_state:
 
 # ======== LOAD SEMUA MODEL ========
 model_w2v = Word2Vec.load("models/model_w2v.model")
-model_cnn_lstm = load_model("models/cnn_lstm_model_v2.h5")
+model_cnn_lstm = load_model(
+    "models/cnn_lstm_model_v2.h5",
+    custom_objects={'Orthogonal': Orthogonal}
+)
 tfidf_vectorizer = joblib.load("models/tfidf_vectorizer.pkl")
 model_nb = joblib.load("models/model_naive_bayes.pkl")
 model_lr = joblib.load("models/model_logistic_regression.pkl")
