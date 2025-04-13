@@ -97,7 +97,7 @@ model_w2v = Word2Vec.load(w2v_file_path)
 #         "DTypePolicy": tf.keras.mixed_precision.Policy,
 #         "Orthogonal": tf.keras.initializers.Orthogonal
 #     })
-model_cnn_lstm = TFSMLayer(saved_model_dir, call_endpoint="serving_default")
+model_cnn_lstm = TFSMLayer("models/cnn_lstm_model_v2.keras", call_endpoint="serving_default")
 # model_cnn_lstm = load_model("models/cnn_lstm_model_v2")
 tfidf_vectorizer = joblib.load("models/tfidf_vectorizer.pkl")
 model_nb = joblib.load("models/model_naive_bayes.pkl")
