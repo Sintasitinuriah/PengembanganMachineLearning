@@ -49,7 +49,7 @@ base_url = "https://raw.githubusercontent.com/Sintasitinuriah/PengembanganMachin
 model_files = {
     "models/model_w2v.model": "model_w2v.model",
     "models/cnn_lstm_model_v2.keras": "cnn_lstm_model_v2.keras",
-    "models/cnn_lstm_model_tf_v2.zip": "cnn_lstm_model_tf_v2.zip",
+    "models/cnn_lstm_models_v1.zip": "cnn_lstm_models_v1.zip",
     "models/tfidf_vectorizer.pkl": "tfidf_vectorizer.pkl",
     "models/model_naive_bayes.pkl": "model_naive_bayes.pkl",
     "models/model_logistic_regression.pkl": "model_logistic_regression.pkl",
@@ -65,9 +65,9 @@ for local_path, filename in model_files.items():
 
 # ======== EKSTRAK MODEL CNN-LSTM JIKA PERLU ========
 
-saved_model_dir = "models/cnn_lstm_model_tf_v2"
+saved_model_dir = "models/cnn_lstm_models_v1"
 if not os.path.exists(saved_model_dir):
-    extract_zip("models/cnn_lstm_model_tf_v2.zip", "models/")
+    extract_zip("models/cnn_lstm_models_v1.zip", "models/")
 
 # ======== LOAD SEMUA MODEL ========
 
@@ -76,7 +76,7 @@ model_w2v = Word2Vec.load("models/model_w2v.model")
 #         "DTypePolicy": tf.keras.mixed_precision.Policy,
 #         "Orthogonal": tf.keras.initializers.Orthogonal
 #     })
-model_cnn_lstm = TFSMLayer("models/cnn_lstm_model_v2/cnn_lstm_model_v2", call_endpoint="serving_default")
+model_cnn_lstm = TFSMLayer(saved_model_dir, call_endpoint="serving_default")
 # model_cnn_lstm = load_model("models/cnn_lstm_model_v2")
 tfidf_vectorizer = joblib.load("models/tfidf_vectorizer.pkl")
 model_nb = joblib.load("models/model_naive_bayes.pkl")
