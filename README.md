@@ -1,6 +1,7 @@
 # 📱 Analisis dan Klasifikasi Ulasan Aplikasi OVO
 
-Proyek ini bertujuan untuk mengumpulkan, menganalisis, dan mengklasifikasikan ulasan pengguna dari aplikasi OVO menggunakan metode scraping dan machine learning berbasis deep learning.
+Proyek ini bertujuan untuk mengumpulkan, menganalisis, dan mengklasifikasikan ulasan pengguna dari aplikasi OVO menggunakan metode scraping dan machine learning berbasis deep learning. Percobaan prediksinya bisa diakses di sini ya: 
+[Analisis Senitimen Ulasan Aplikasi OVO](https://predictsentimenovoreview.streamlit.app/)
 
 ## 📌 Deskripsi Proyek
 
