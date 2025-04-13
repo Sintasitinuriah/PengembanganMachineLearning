@@ -42,6 +42,27 @@ def extract_zip(zip_path, extract_to):
     with zipfile.ZipFile(zip_path, 'r') as zip_ref:
         zip_ref.extractall(extract_to)
 
+
+def download_from_gdrive(file_id, dest_path):
+    if not os.path.exists(dest_path):
+        print(f"Downloading {dest_path} from Google Drive...")
+        url = f"https://drive.google.com/uc?id={file_id}"
+        response = requests.get(url, stream=True)
+        if response.status_code == 200:
+            with open(dest_path, "wb") as f:
+                f.write(response.content)
+            print("Download complete.")
+        else:
+            raise Exception(f"Failed to download from Google Drive. Status code: {response.status_code}")
+
+# Buat folder models kalau belum ada
+os.makedirs("models", exist_ok=True)
+
+# Download Word2Vec model
+w2v_file_path = "models/model_w2v.model"
+w2v_file_id = "1b_lpq_HWW2qRjztG4OE6Mszh6Mtvx4X9"  # ganti dengan file ID kamu
+download_from_gdrive(w2v_file_id, w2v_file_path)
+
 # ======== DAFTAR FILE YANG AKAN DIUNDUH ========
 
 base_url = "https://raw.githubusercontent.com/Sintasitinuriah/PengembanganMachineLearning/main/models/"
@@ -71,7 +92,7 @@ if not os.path.exists(saved_model_dir):
 
 # ======== LOAD SEMUA MODEL ========
 
-model_w2v = Word2Vec.load("models/model_w2v.model")
+model_w2v = Word2Vec.load(w2v_file_path)
 # model_cnn_lstm = load_model("models/cnn_lstm_model_v2.keras", custom_objects={
 #         "DTypePolicy": tf.keras.mixed_precision.Policy,
 #         "Orthogonal": tf.keras.initializers.Orthogonal
