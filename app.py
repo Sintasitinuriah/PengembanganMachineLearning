@@ -6,6 +6,7 @@ import streamlit as st
 import numpy as np
 import pandas as pd
 import joblib
+from keras.layers import TFSMLayer
 from keras.models import load_model
 from tensorflow.keras.initializers import Orthogonal
 from gensim.models import Word2Vec
@@ -75,7 +76,8 @@ model_w2v = Word2Vec.load("models/model_w2v.model")
 #         "DTypePolicy": tf.keras.mixed_precision.Policy,
 #         "Orthogonal": tf.keras.initializers.Orthogonal
 #     })
-model_cnn_lstm = load_model("models/cnn_lstm_model_v2")
+model_cnn_lstm = TFSMLayer("models/cnn_lstm_model_v2", call_endpoint="serving_default")
+# model_cnn_lstm = load_model("models/cnn_lstm_model_v2")
 tfidf_vectorizer = joblib.load("models/tfidf_vectorizer.pkl")
 model_nb = joblib.load("models/model_naive_bayes.pkl")
 model_lr = joblib.load("models/model_logistic_regression.pkl")
